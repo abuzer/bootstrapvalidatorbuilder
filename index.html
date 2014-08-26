@@ -19,11 +19,13 @@
         'notEmpty': 'The value is required',
         'emailAddress': 'The value is not a valid email address',
     };
+    var formId = 'validateForm';
     $(function() {
         $('#validator').on('change', function() {
             $('#message').val(messages[this.value]);
         });
         $('#addRule').on('click', function() {
+        	formId = $('#formId').val();
             _js.push({
                 fieldName: $('#fieldName').val(),
                 validators: $('#validator').val()[0],
@@ -40,7 +42,7 @@
     renderjs = function() {
 
         var js = "<pre> $(document).ready(function() { <br>\
-	$('#profileForm').bootstrapValidator({ <br>\
+	$('#" + formId + "').bootstrapValidator({ <br>\
         feedbackIcons: { <br>\
             valid: 'glyphicon glyphicon-ok', <br>\
             invalid: 'glyphicon glyphicon-remove', <br>\
@@ -90,6 +92,10 @@
                 <div class="well">
                     <h2>Builder</h2>
                     <form role="form" id="form-builder">
+                        <div class="form-group">
+                            <label for="formId">Form ID </label>
+                            <input type="input" class="form-control" id="formId" required placeholder="Form ID [ #validateForm ]">
+                        </div>
                         <div class="form-group">
                             <label for="fieldName">Name / ID</label>
                             <input type="input" class="form-control" id="fieldName" required placeholder="Field Name">
